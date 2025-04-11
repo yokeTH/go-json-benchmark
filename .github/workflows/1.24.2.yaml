@@ -23,6 +23,9 @@ jobs:
           mkdir -p result
           go test -bench=. --ldflags="-checklinkname=0" > result/result.txt || echo "Run failed but proceeding."
 
+      - name: Echo result.txt
+        run: cat result/result.txt
+
       - name: Generate Report
         run: go run result/result.go
 
