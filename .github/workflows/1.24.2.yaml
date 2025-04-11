@@ -26,11 +26,8 @@ jobs:
       - name: Generate Report
         run: go run result/result.go
 
-      - name: Update README
+      - name: Print README.md to Summary
         run: |
-          echo "### Test Results Summary" > temp_summary.md
-          tail -n 10 result/result.txt >> temp_summary.md
-          echo "" >> temp_summary.md
-          echo "Full results are available in result/result.txt." >> temp_summary.md
-          cat temp_summary.md >> README.md
-        if: always() # Ensure this step runs even if previous ones fail
+          echo "### README.md Content" >> $GITHUB_STEP_SUMMARY
+          cat README.md >> $GITHUB_STEP_SUMMARY
+        if: always() # Run even if previous steps fail
