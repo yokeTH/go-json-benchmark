@@ -1,0 +1,22 @@
+name: Manual Go Setup
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-go:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.2"
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: Verify Go version
+        run: go test -bench=. --ldflags="-checklinkname=0"
